@@ -1,33 +1,34 @@
 import allure
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions
+import pytest
 from data import UrlPage
 from pages.main_page import MainPage
-from locators.going_page_locators import GoingPageLocators
 from locators.order_page_locators import OrderPageLocators
-
 
 
 class TestGoingPage:
 
     @allure.title('Проверка перехода по клику на лого Яндекса')
-    @allure.step('Клик на лого Яндекс')
     def test_click_to_logo_ya(self, driver):
-        driver.get(UrlPage.SAMOKAT_URL)
         main_page = MainPage(driver)
-        main_page.click_to_logo(GoingPageLocators.LOGO_BUTTON_YA)
-        driver.switch_to.window(driver.window_handles[-1])
-        button_find = WebDriverWait(driver, 3).until(
-            expected_conditions.presence_of_element_located(GoingPageLocators.DZEN_BUTTON_FIND))
+        main_page.go_to_url()
+        main_page.click_to_logo_ya()
+        main_page.switch_to_new_window()
+        main_page.find_element()
+        button_find = main_page.find_element()
         assert button_find.is_displayed()
 
+
     @allure.title('Проверка перехода по клику на лого Самоката')
-    @allure.step('Клик на лого Самокат')
-    def test_click_to_logo_samokat(self, driver):
-        driver.get(UrlPage.SAMOKAT_URL)
+    @pytest.mark.parametrize(
+        "locator", [OrderPageLocators.BUTTON_ORDER_MINI,
+                    OrderPageLocators.BUTTON_ORDER_BIG]
+    )
+    def test_click_to_logo_samokat(self,locator, driver):
         main_page = MainPage(driver)
-        main_page.click_button_order(OrderPageLocators.BUTTON_ORDER_MINI)
-        main_page.click_to_logo(GoingPageLocators.LOGO_BUTTON_SAMOKAT)
+        main_page.go_to_url()
+        main_page.scroll_to_element(locator)
+        main_page.click_to_element(locator)
+        main_page.click_to_logo_samokat()
         current_url = driver.current_url
         assert current_url == UrlPage.SAMOKAT_URL
 

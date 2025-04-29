@@ -27,6 +27,10 @@ class OrderPage(BasePage):
         self.click_to_element(OrderPageLocators.BUTTON_COMPLIT)
         self.click_to_element(OrderPageLocators.BUTTON_YES)
 
+    @allure.step('Получение модального окна')
+    def find_modal_window(self):
+        return self.find_element_with_wait(OrderPageLocators.MODAL_WINDOW)
+
 
 
 

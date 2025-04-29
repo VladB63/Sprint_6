@@ -3,7 +3,8 @@ from selenium.webdriver.common.by import By
 class OrderPageLocators:
 
     BUTTON_ORDER_MINI = By.CLASS_NAME, 'Button_Button__ra12g'  # кнопка заказать вверху страницы
-    BUTTON_ORDER_BIG = By.CLASS_NAME, 'Button_Button__ra12g Button_UltraBig__UU3Lp'  # кнопка заказать внизу страницы
+    BUTTON_ORDER_BIG = By.CSS_SELECTOR, '.Button_Button__ra12g.Button_Middle__1CSJM'  # кнопка заказать внизу страницы
+
     METRO_STATION = By.XPATH, '//input[@placeholder="* Станция метро"]'  # поле станции метро
     BUTTON_ORDER_NEXT = By.XPATH, '//button[text()= "Далее"]'  # кнопка далее на странице ввода фио
     NAME_FIELD = By.XPATH, '//input[@placeholder="* Имя"]'  # поле ввода имени

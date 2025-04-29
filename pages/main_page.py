@@ -1,9 +1,17 @@
 import allure
 from locators.main_page_locators import MainPageLocators
 from pages.base_page import BasePage
+from locators.going_page_locators import GoingPageLocators
+from data import UrlPage
+
 
 
 class MainPage(BasePage):
+
+    @allure.step('Переход по урлу')
+    def go_to_url(self):
+        self.driver.get(UrlPage.SAMOKAT_URL)
+
 
     @allure.step('Клик на вопрос')
     def click_to_question(self, num):
@@ -18,21 +26,26 @@ class MainPage(BasePage):
         return self.get_text_from_element(locator_format)
 
 
-    @allure.step('Клик лого для перехода')
-    def click_to_logo(self, locator):
-        self.click_to_element(locator)
+    @allure.step('Клик лого Яндекс')
+    def click_to_logo_ya(self):
+        self.click_to_element(GoingPageLocators.LOGO_BUTTON_YA)
+
+
+    @allure.step('Клик лого Самокат')
+    def click_to_logo_samokat(self):
+        self.click_to_element(GoingPageLocators.LOGO_BUTTON_SAMOKAT)
 
 
     @allure.step('Клик кнопки заказать на главной страницы')
     def click_button_order(self, locator):
+        self.find_element_with_wait(locator)
+        self.scroll_to_element(locator)
         self.click_to_element(locator)
 
 
-
-
-
-
-
+    @allure.step('Получение кнопки Найти на страничке Дзен')
+    def find_element(self):
+        return self.find_element_with_wait(GoingPageLocators.DZEN_BUTTON_FIND)
 
 
 

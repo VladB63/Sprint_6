@@ -10,7 +10,6 @@ from locators.order_page_locators import OrderPageLocators
 class TestOrderPage:
 
     @allure.title('Проверка оформления заказа')
-    @allure.step('Оформление заказа')
     @pytest.mark.parametrize(
         "locator, order_data", [
             (OrderPageLocators.BUTTON_ORDER_MINI, OrderData.DATA_ORDER_1),
@@ -18,12 +17,12 @@ class TestOrderPage:
         ]
     )
     def test_making_order_button(self, driver, locator, order_data):
-        driver.get(UrlPage.SAMOKAT_URL)
         main_page = MainPage(driver)
-        main_page.click_button_order(OrderPageLocators.BUTTON_ORDER_MINI)
+        main_page.go_to_url()
+        main_page.click_button_order(locator)
         order_page = OrderPage(driver)
         order_page.completion_fields(order_data)
-        modal_complit = order_page.find_element_with_wait(OrderPageLocators.MODAL_WINDOW)
+        modal_complit = order_page.find_modal_window()
         assert modal_complit.is_displayed()
 
 
