@@ -9,8 +9,8 @@ from data import UrlPage
 class MainPage(BasePage):
 
     @allure.step('Переход по урлу')
-    def go_to_url(self):
-        self.driver.get(UrlPage.SAMOKAT_URL)
+    def open_url_samokat(self):
+        self.go_to_url(UrlPage.SAMOKAT_URL)
 
 
     @allure.step('Клик на вопрос')
@@ -44,7 +44,7 @@ class MainPage(BasePage):
 
 
     @allure.step('Получение кнопки Найти на страничке Дзен')
-    def find_element(self):
+    def find_button_find(self):
         return self.find_element_with_wait(GoingPageLocators.DZEN_BUTTON_FIND)
 
 

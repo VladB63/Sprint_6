@@ -10,11 +10,11 @@ class TestGoingPage:
     @allure.title('Проверка перехода по клику на лого Яндекса')
     def test_click_to_logo_ya(self, driver):
         main_page = MainPage(driver)
-        main_page.go_to_url()
+        main_page.open_url_samokat()
         main_page.click_to_logo_ya()
         main_page.switch_to_new_window()
-        main_page.find_element()
-        button_find = main_page.find_element()
+        main_page.find_button_find()
+        button_find = main_page.find_button_find()
         assert button_find.is_displayed()
 
 
@@ -25,10 +25,10 @@ class TestGoingPage:
     )
     def test_click_to_logo_samokat(self,locator, driver):
         main_page = MainPage(driver)
-        main_page.go_to_url()
+        main_page.open_url_samokat()
         main_page.scroll_to_element(locator)
         main_page.click_to_element(locator)
         main_page.click_to_logo_samokat()
-        current_url = driver.current_url
+        current_url = main_page.get_current_url()
         assert current_url == UrlPage.SAMOKAT_URL
 

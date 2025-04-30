@@ -12,7 +12,7 @@ class TestMainPage:
     )
     def test_click_question(self, driver, num):
         main_page = MainPage(driver)
-        main_page.go_to_url()
+        main_page.open_url_samokat()
         main_page.click_to_question(num)
         assert main_page.get_answer(num) == AnswerBlock.ANSWER_LIST[num]
 

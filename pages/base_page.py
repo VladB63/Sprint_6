@@ -1,7 +1,6 @@
 import allure
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions
-from data import UrlPage
 
 
 
@@ -10,6 +9,9 @@ class BasePage:
     def __init__(self, driver):
         self.driver = driver
 
+    @allure.step('Переход по урлу')
+    def go_to_url(self, url):
+        self.driver.get(url)
 
     # ищем элемент с ожиданием
     @allure.step('Поиск элемента')
@@ -53,7 +55,9 @@ class BasePage:
     def switch_to_new_window(self):
         self.driver.switch_to.window(self.driver.window_handles[-1])
 
-
+    @allure.step('Получение ссылки')
+    def get_current_url(self):
+        return self.driver.current_url
 
 
 

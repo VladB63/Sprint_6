@@ -1,6 +1,6 @@
 import allure
 import pytest
-from data import UrlPage, OrderData
+from data import OrderData
 from pages.main_page import MainPage
 from pages.order_page import OrderPage
 from locators.order_page_locators import OrderPageLocators
@@ -18,7 +18,7 @@ class TestOrderPage:
     )
     def test_making_order_button(self, driver, locator, order_data):
         main_page = MainPage(driver)
-        main_page.go_to_url()
+        main_page.open_url_samokat()
         main_page.click_button_order(locator)
         order_page = OrderPage(driver)
         order_page.completion_fields(order_data)
